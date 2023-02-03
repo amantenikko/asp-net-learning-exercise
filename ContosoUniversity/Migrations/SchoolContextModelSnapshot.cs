@@ -57,6 +57,10 @@ namespace ContosoUniversity.Migrations
 
                     b.HasKey("EnrollmentID");
 
+                    b.HasIndex("CourseID");
+
+                    b.HasIndex("StudentID");
+
                     b.ToTable("Enrollments");
                 });
 
@@ -82,64 +86,33 @@ namespace ContosoUniversity.Migrations
                     b.ToTable("Students");
                 });
 
-            modelBuilder.Entity("CourseEnrollment", b =>
+            modelBuilder.Entity("ContosoUniversity.Models.Enrollment", b =>
                 {
-                    b.Property<int>("CourseID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("EnrollmentsEnrollmentID")
-                        .HasColumnType("int");
-
-                    b.HasKey("CourseID", "EnrollmentsEnrollmentID");
-
-                    b.HasIndex("EnrollmentsEnrollmentID");
-
-                    b.ToTable("CourseEnrollment");
-                });
-
-            modelBuilder.Entity("EnrollmentStudent", b =>
-                {
-                    b.Property<int>("EnrollmentsEnrollmentID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StudentID")
-                        .HasColumnType("int");
-
-                    b.HasKey("EnrollmentsEnrollmentID", "StudentID");
-
-                    b.HasIndex("StudentID");
-
-                    b.ToTable("EnrollmentStudent");
-                });
-
-            modelBuilder.Entity("CourseEnrollment", b =>
-                {
-                    b.HasOne("ContosoUniversity.Models.Course", null)
-                        .WithMany()
+                    b.HasOne("ContosoUniversity.Models.Course", "Course")
+                        .WithMany("Enrollments")
                         .HasForeignKey("CourseID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ContosoUniversity.Models.Enrollment", null)
-                        .WithMany()
-                        .HasForeignKey("EnrollmentsEnrollmentID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("EnrollmentStudent", b =>
-                {
-                    b.HasOne("ContosoUniversity.Models.Enrollment", null)
-                        .WithMany()
-                        .HasForeignKey("EnrollmentsEnrollmentID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ContosoUniversity.Models.Student", null)
-                        .WithMany()
+                    b.HasOne("ContosoUniversity.Models.Student", "Student")
+                        .WithMany("Enrollments")
                         .HasForeignKey("StudentID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Course");
+
+                    b.Navigation("Student");
+                });
+
+            modelBuilder.Entity("ContosoUniversity.Models.Course", b =>
+                {
+                    b.Navigation("Enrollments");
+                });
+
+            modelBuilder.Entity("ContosoUniversity.Models.Student", b =>
+                {
+                    b.Navigation("Enrollments");
                 });
 #pragma warning restore 612, 618
         }
