@@ -1,0 +1,1 @@
+Contoso University built using ASP.NET Core MVC and Entity Framework Core with controllers and views on .NET 7.0.2. See; [https://docs.microsoft.com/en-us/aspnet/core/data/ef-rp/](https://learn.microsoft.com/en-gb/aspnet/core/data/ef-mvc/?view=aspnetcore-7.0).
