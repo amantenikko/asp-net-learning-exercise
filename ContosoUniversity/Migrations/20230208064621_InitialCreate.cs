@@ -16,7 +16,7 @@ namespace ContosoUniversity.Migrations
                 columns: table => new
                 {
                     CourseID = table.Column<int>(type: "int", nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Title = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
                     Credits = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -30,8 +30,8 @@ namespace ContosoUniversity.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    FirstMidName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FirstMidName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     EnrollmentDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
