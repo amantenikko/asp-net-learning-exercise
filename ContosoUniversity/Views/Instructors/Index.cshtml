@@ -48,7 +48,7 @@
                     @foreach (var course in item.CourseAssignments!)
                     {
                         @course.Course!.CourseID
-                        <span>&nbsp</span>
+                        @:
                         @course.Course.Title <br />
                     }
                 </td>
@@ -79,7 +79,7 @@
             string selectedRow = "";
             if (item.CourseID == (int?)ViewData["CourseID"])
             {
-                selectedRow = "success";
+                selectedRow = "table-success";
             }
             <tr class="@selectedRow">
                 <td>
