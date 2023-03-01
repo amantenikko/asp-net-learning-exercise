@@ -98,11 +98,18 @@ public static class DbInitializer
                 InstructorID  = instructors.Single( i => i.LastName == "Kapoor").ID 
             }
         };
-
+        
         foreach (Department d in departments)
         {
             context.Departments.Add(d);
         }
+
+        try
+        {
+            Department tempDepartment = context.Departments.SingleOrDefault(m => m.Name == "Temp")!;
+            context.Departments.Remove(tempDepartment);
+        }
+        catch (Exception) {}
         context.SaveChanges();
 
         var courses = new Course[]
